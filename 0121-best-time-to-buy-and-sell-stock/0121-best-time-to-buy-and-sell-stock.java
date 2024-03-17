@@ -1,23 +1,17 @@
-public class Solution {
-    public void solve(int[] prices, int i, int[] min, int[] maxProfit) {
-        if (i >= prices.length) {
-            return;
-        }
-        if (prices[i] < min[0]) {
-            min[0] = prices[i];
-        }
-        int profit = prices[i] - min[0];
-        if (profit > maxProfit[0]) {
-            maxProfit[0] = profit;
-        }
-        solve(prices, i + 1, min, maxProfit);
-    }
-    
+class Solution {
     public int maxProfit(int[] prices) {
-        int[] min = {Integer.MAX_VALUE};
-        int[] maxProfit = {Integer.MIN_VALUE};
-        int i = 0;
-        solve(prices, i, min, maxProfit);
-        return maxProfit[0];
+        int i=0,j=1;
+        int max=0;
+        while(j<prices.length){
+            if(prices[j]<prices[i]){
+                i=j;
+                j++;
+            }
+            else{
+            max=Math.max(max,prices[j]-prices[i]);
+            j++;
+            }
+        }
+        return max;
     }
 }
