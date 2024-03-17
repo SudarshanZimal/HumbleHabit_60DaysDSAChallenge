@@ -3,11 +3,14 @@ import java.util.Arrays;
 public class Solution {
     public int maxProfit(int[] prices) {
         int n = prices.length;
-        int buyAtPrice = Integer.MAX_VALUE;
+        int[] maxPrices = new int[n];
+        maxPrices[n - 1] = prices[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            maxPrices[i] = Math.max(maxPrices[i + 1], prices[i]);
+        }
         int maxProfit = 0;
         for (int i = 0; i < n; i++) {
-            buyAtPrice = Math.min(buyAtPrice, prices[i]);
-            maxProfit = Math.max(maxProfit, prices[i] - buyAtPrice);
+            maxProfit = Math.max(maxProfit, maxPrices[i] - prices[i]);
         }
         return maxProfit;
     }
